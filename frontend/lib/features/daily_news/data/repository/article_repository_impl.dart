@@ -14,31 +14,31 @@ class ArticleRepositoryImpl implements ArticleRepository {
   final NewsApiService _newsApiService;
   final AppDatabase _appDatabase;
   ArticleRepositoryImpl(this._newsApiService,this._appDatabase);
-  
+
   @override
   Future<DataState<List<ArticleModel>>> getNewsArticles() async {
-   try {
-    final httpResponse = await _newsApiService.getNewsArticles(
-      apiKey:newsAPIKey,
-      country:countryQuery,
-      category:categoryQuery,
-    );
-
-    if (httpResponse.response.statusCode == HttpStatus.ok) {
-      return DataSuccess(httpResponse.data);
-    } else {
-      return DataFailed(
-        DioError(
-          error: httpResponse.response.statusMessage,
-          response: httpResponse.response,
-          type: DioErrorType.response,
-          requestOptions: httpResponse.response.requestOptions
-        )
+    try {
+      final httpResponse = await _newsApiService.getNewsArticles(
+        apiKey: newsAPIKey,
+        country: countryQuery,
+        category: categoryQuery,
       );
+
+      if (httpResponse.response.statusCode == HttpStatus.ok) {
+        return DataSuccess(httpResponse.data);
+      } else {
+        return DataFailed(
+          DioException(
+            requestOptions: httpResponse.response.requestOptions,
+            response: httpResponse.response,
+            type: DioExceptionType.badResponse, // <— v5
+            error: httpResponse.response.statusMessage,
+          ),
+        );
+      }
+    } on DioException catch (e) { // <— v5
+      return DataFailed(e);
     }
-   } on DioError catch(e){
-    return DataFailed(e);
-   }
   }
 
   @override

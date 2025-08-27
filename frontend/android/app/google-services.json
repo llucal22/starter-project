@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "680438577686",
+    "project_id": "symmetry-applicant-fbffc",
+    "storage_bucket": "symmetry-applicant-fbffc.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:680438577686:android:e03c9438c8bf2a37075337",
+        "android_client_info": {
+          "package_name": "com.example.news_app_clean_architecture"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOUS0o49fyQ5E3Fu_57lSzr2w5BWhQui0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -17,6 +17,19 @@ class DailyNews extends StatelessWidget {
 
   _buildAppbar(BuildContext context) {
     return AppBar(
+      leadingWidth: 130,
+      leading: Padding(
+        padding: const EdgeInsets.only(left: 8),
+        child: TextButton(
+          onPressed: () => Navigator.pushNamed(context, '/MyArticles'),
+          style: TextButton.styleFrom(
+            foregroundColor: Colors.black,
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 12),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+          ),
+          child: const Text('Mis artículos'),
+        ),
+      ),
       title: const Text(
         'Daily News',
         style: TextStyle(color: Colors.black),
@@ -32,6 +45,7 @@ class DailyNews extends StatelessWidget {
       ],
     );
   }
+
 
   _buildPage() {
     return BlocBuilder<RemoteArticlesBloc, RemoteArticlesState>(
@@ -70,8 +84,8 @@ class DailyNews extends StatelessWidget {
         children: articleWidgets,
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // TODO: REPLACE ROUTE WITH YOUR "ADD ARTICLE" PAGE
+        onPressed: () async {
+          final published = await Navigator.pushNamed(context, '/PublishArticle');
         },
         child: const Icon(Icons.add),
       ),
